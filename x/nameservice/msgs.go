@@ -22,7 +22,7 @@ func NewMsgSetName(name string, value string, owner sdk.AccAddress) MsgSetName {
 
 // Type should return the name of the module
 func (msg MsgSetName) Route() string {
-	return "nameService"
+	return "nameservice"
 }
 
 // Name should return the action
@@ -55,4 +55,52 @@ func (msg MsgSetName) GetSignBytes() []byte {
 
 func (msg MsgSetName) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{msg.Owner}
+}
+
+// MsgBuyName defines the BuyName message
+type MsgBuyName struct {
+	Name  string
+	Bid   sdk.Coins
+	Buyer sdk.AccAddress
+}
+
+func NetMsgBuyName(name string, bid sdk.Coins, buyer sdk.AccAddress) MsgBuyName {
+	return MsgBuyName{
+		Name:  name,
+		Bid:   bid,
+		Buyer: buyer,
+	}
+}
+
+func (msg MsgBuyName) Route() string {
+	return "nameservice"
+}
+
+func (msg MsgBuyName) Type() string {
+	return "buy_name"
+}
+
+func (msg MsgBuyName) ValidateBasic() sdk.Error {
+	if msg.Buyer.Empty() {
+		return sdk.ErrInvalidAddress(msg.Buyer.String())
+	}
+	if len(msg.Name) == 0 {
+		return sdk.ErrUnknownRequest("Name cannot be empty")
+	}
+	if msg.Bid.IsAnyNegative() {
+		return sdk.ErrInsufficientCoins("Bids must be positive")
+	}
+	return nil
+}
+
+func (msg MsgBuyName) GetSignBytes() []byte {
+	b, err := json.Marshal(msg)
+	if err != nil {
+		panic(err)
+	}
+	return sdk.MustSortJSON(b)
+}
+
+func (msg MsgBuyName) GetSigners() []sdk.AccAddress {
+	return []sdk.AccAddress{msg.Buyer}
 }
