@@ -10,7 +10,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/client/context"
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/shibas11/nameservice/x/nameservice"
+	"github.com/shibas11/nameservice-exam/x/nameservice"
 
 	"github.com/gorilla/mux"
 )

@@ -10,7 +10,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/bank"
 	"github.com/cosmos/cosmos-sdk/x/params"
 	stake "github.com/cosmos/cosmos-sdk/x/staking/types"
-	"github.com/shibas11/nameservice/x/nameservice"
+	"github.com/shibas11/nameservice-exam/x/nameservice"
 
 	bam "github.com/cosmos/cosmos-sdk/baseapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
