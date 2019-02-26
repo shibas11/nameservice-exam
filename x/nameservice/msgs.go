@@ -64,7 +64,7 @@ type MsgBuyName struct {
 	Buyer sdk.AccAddress
 }
 
-func NetMsgBuyName(name string, bid sdk.Coins, buyer sdk.AccAddress) MsgBuyName {
+func NewMsgBuyName(name string, bid sdk.Coins, buyer sdk.AccAddress) MsgBuyName {
 	return MsgBuyName{
 		Name:  name,
 		Bid:   bid,
